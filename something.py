@@ -1,3 +1,29 @@
+// ❌ WRONG — div doesn't fire onchange
+let el2 = document.getElementById("header_2_1_img");
+if (el2) {
+  (el2 as HTMLInputElement).onchange = function (e) { ... }
+}
+
+// ✅ FIX — target the input inside the div
+let el2 = document.getElementById("header_2_1_img");
+if (el2) {
+  const inputEl = el2.querySelector("input");
+  if (inputEl) {
+    inputEl.onchange = function (e) {
+      const input = e.target as HTMLInputElement;
+      if (!input?.files) return;
+      handleUploadFiles(Array.from(input.files));
+    };
+  }
+}
+
+
+
+
+
+
+
+
 # ============================================================================
 # Generate Combined SAR Template API
 # ----------------------------------------------------------------------------
